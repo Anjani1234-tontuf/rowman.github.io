@@ -1,0 +1,12 @@
+@media (min-width: 40.0rem) { 
+  textarea {
+    width: auto;
+    height: auto;
+  }
+  input[type='text'] {
+    width: auto;
+  }
+  table {
+    width: auto;
+  }
+}

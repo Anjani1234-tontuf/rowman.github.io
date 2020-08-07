@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Portable Regex</title>
+    <link rel="stylesheet" type="text/css" href="https://dohliam.github.io/dropin-minimal-css/min/milligram.min.css"> 
+    <style type="text/css">
+      #input_text {
+        width: 85%;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="portregex.js" type="text/javascript"></script>
+  </head>
+
+  <body onload="selectText()">
+
+  <h1>Portable Regex</h1>
+
+  <div id="input_text">
+    <h2>Input</h2>
+    <textarea id="text_input" cols="70" rows="10">In computing, a regular expression provides a concise and flexible means to "match" (specify and recognize) strings of text, such as particular characters, words, or patterns of characters. Common abbreviations for "regular expression" include regex and regexp.
+
+A regular expression is written in a formal language that can be interpreted by a regular expression processor, which is a program that either serves as a parser generator or examines text and identifies parts that match the provided specification.
+
+The concept of regular expressions was first popularized by utilities provided by Unix distributions, in particular the editor ed and the filter grep. Historically, the concept of regular expressions is associated with Kleene's formalism of regular sets, introduced in the 1950s.</textarea>
+    <br>
+
+    Regular Expression:&nbsp;<input type="text" size="50" id="regex_input" value="(\w+\sexpr.*?\b)|(\breg.*?\b)" onkeyup="selectText();" />
+      <select id="insert_special" onchange="insertRegex(this.value)">
+        <option value="">Insert special characters...</option>
+        <option value="\t">Tab</option>
+        <option value="\n">Linebreak</option>
+        <option value="\s">Whitespace</option>
+        <option value="\S">Any non-whitespace</option>
+        <option value="\b">Word boundary</option>
+        <option value="\d">Any digit [0-9]</option>
+        <option value="\w">Any letter or digit</option>
+        <option value="\W">Any non-word character</option>
+        <option value="\w+">Any word</option>
+        <option value="\D">Any non-digit</option>
+        <option value="?">Non-greedy match</option>
+        <option value="*">Zero or more of prec. term</option>
+        <option value="+">One or more of prec. term</option>
+        <option value=".">Any character</option>
+        <option value="\">Escape</option>
+        <option value="[一-龜]">Any Hanzi</option>
+        <option value="[あ-ん]">Any Hiragana</option>
+        <option value="[ァ-ヺ]">Any Katakana</option>
+        <option value="[가-힣]">Any Hangul</option>
+        <option value="[Ё-ё]">Any Cyrillic</option>
+        <option value="[a-ȇ]+">Any Latin (incl. diacritics)</option>
+        <option value="[a-z]">Any lowercase letter</option>
+        <option value="[A-Z]">Any uppercase letter</option>
+        <option value="[^aeiou\W]">Any consonant</option>
+        <option value="[aeiou]">Any vowel</option>
+      </select><p>
+
+
+    Replacement Text:&nbsp;<input type="text" size="30" id="replace_text" value="regex" onkeyup="replaceText();" />
+
+    <input type=button onclick="insertReplace('\t')" value="Insert tab">
+    <input type=button onclick="insertReplace('$1')" value="Insert backreference"><p>
+
+
+      <button type="button" onclick="replaceText();">Regex it!</button>
+
+<h2>Result</h2>
+<div id="result">&nbsp;</div>
+
+<h2>Other Options</h2>
+  <button type="button" onclick="testText();">Test</button> Search for specified value and return true or false depending on the result<br>
+  <button type="button" onclick="execText();">Exec</button> Search for specified value, and return text of the found results<br>
+  <button type="button" onclick="selectText();">Select</button> Highlight matching text<br>
+  <button type="button" onclick="grep('html');">Grep</button> Print lines matching the pattern
+  <input type=button onclick="grep();" value="Pipe to input window"><br>
+  <button type="button" onclick="vgrep('html');">Reverse Grep</button> Print lines not matching the pattern
+  <input type=button onclick="vgrep();" value="Pipe to input window"><br>
+  <button type="button" onclick="modifySource();">Modify original</button> Show changes in input window<br>
+  <button type="button" onclick="showSource();">Show original</button> Display source text<p>
+
+  </body>
+</html>

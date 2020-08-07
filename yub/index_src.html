@@ -1,0 +1,1067 @@
+<html>
+  <head>
+    <title>yub.js | web command-line</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta name=viewport content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="favicon.ico?v=2">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
+    <link rel="search" type="application/opensearchdescription+xml" title="yub.js" href="xml"/>
+
+    <link id="stylesheet" rel="stylesheet" href="css/default.css">
+    <script src="mods.js"></script>
+
+    <script type="text/javascript">
+      window.onload = function() { document.getElementById('yub').focus(); } 
+
+      var modson = "on";
+
+      if (typeof(mods) == 'undefined') {
+        modson = "off";
+      }
+
+var engines = [
+  {"n":"about", "a":"", "d":"Information about yub.js", "f":"https://github.com/dohliam/yub"},
+  {"n":"g", "a":"https://www.google.com/search?q=%s", "d":"Google Search", "f":"https://google.com/"},
+  {"n":"gim", "a":"https://www.google.com/search?tbm=isch&q=%s", "d":"Google Image Search", "f":"https://images.google.com/"},
+  {"n":"gmail", "a":"https://mail.google.com/mail/u/0/#search/%s", "d":"Gmail", "f":"https://gmail.com/"},
+  {"n":"drive", "a":"https://drive.google.com/#search/%s", "d":"Google Drive", "f":"https://drive.google.com/"},
+  {"n":"am", "a":"https://www.amazon.com/exec/obidos/external-search?mode=blended&keyword=%s", "d":"Amazon.com Product Search", "f":"https://www.amazon.com/"},
+  {"n":"gt", "a":"https://translate.google.com/#auto/en/%s", "d":"Google Auto-Translate Text", "f":"https://translate.google.com"},
+  {"n":"gtu", "a":"https://translate.google.com/translate?u=%s", "d":"Google Auto-Translate URL", "f":"https://translate.google.com"},
+  {"n":"gb", "a":"https://books.google.com/books?q=%s&btnG=Search+Books", "d":"Google Books Search", "f":"https://books.google.com"},
+  {"n":"gfl", "a":"https://google.com/search?q=%s&btnI=I%27m+Feeling+Lucky", "d":"Google Feeling Lucky Search", "f":"https://google.com"},
+  {"n":"gm", "a":"https://maps.google.com/maps?q=%s&output=classic", "d":"Google Maps Search", "f":"https://maps.google.com"},
+  {"n":"gs", "a":"https://scholar.google.com/scholar?q=%s", "d":"Google Scholar Search", "f":"https://scholar.google.com"},
+  {"n":"gmt", "a":"https://www.timeanddate.com/worldclock/results.html?query=%s", "d":"Time and Date for any Location", "f":"https://timeanddate.com/worldclock"},
+  {"n":"weather", "a":"https://openweathermap.org/find?q=%s", "d":"Weather from OpenWeatherMap", "f":"https://openweathermap.org/"},
+  {"n":"wbm", "a":"https://web.archive.org/web/*/%s", "d":"Wayback Machine Internet Archive of URL", "f":"https://archive.org"},
+  {"n":"whois", "a":"https://www.whois.sc/%s", "d":"Whois URL &amp; IP Address Listing", "f":"https://whois.sc"},
+  {"n":"gwhois", "a":"https://gwhois.org/%s", "d":"GWhois DNS & IP search", "f":"https://gwhois.org"},
+  {"n":"wco", "a":"https://commons.wikimedia.org/wiki/Special:Search?search=%s", "d":"Wikimedia Commons Search", "f":"https://commons.wikimedia.org/"},
+  {"n":"wp", "a":"https://en.wikipedia.org/?search=%s", "d":"Wikipedia", "f":"https://en.wikipedia.org/"},
+  {"n":"wv", "a":"https://en.wikivoyage.org/?search=%s", "d":"Wikivoyage", "f":"https://en.wikivoyage.org/"},
+  {"n":"wt", "a":"https://en.wiktionary.org/?search=%s", "d":"Wiktionary", "f":"https://en.wiktionary.org/"},
+  {"n":"wq", "a":"https://en.wikiquote.org/?search=%s", "d":"Wikiquote", "f":"https://en.wikiquote.org/"},
+  {"n":"wn", "a":"https://en.wikinews.org/?search=%s", "d":"Wikinews", "f":"https://en.wikinews.org/"},
+  {"n":"ws", "a":"https://en.wikisource.org/?search=%s", "d":"Wikisource", "f":"https://en.wikisource.org/"},
+  {"n":"gn", "a":"https://news.google.com/news?q=%s", "d":"Google News", "f":"https://news.google.com"},
+  {"n":"yt", "a":"https://www.youtube.com/results?search_type=&search_query=%s&aq=f", "d":"YouTube Video Search", "f":"https://www.youtube.com/"},
+  {"n":"fcc", "a":"https://www.flickr.com/search/?q=%s&l=4", "d":"Flickr cc-by Image Search", "f":"https://www.flickr.com/creativecommons/by-2.0/"},
+  {"n":"flk", "a":"https://www.flickr.com/search?text=%s", "d":"Flickr Image Search", "f":"https://www.flickr.com/"},
+  {"n":"play", "a":"https://play.google.com/store/search?q=%s&c=apps&price=1", "d":"Google Play Store Search", "f":"https://play.google.com/"},
+  {"n":"opc", "a":"https://openclipart.org/search/?query=%s", "d":"Open Clipart Search", "f":"https://openclipart.org/"},
+  {"n":"gten", "a":"https://translate.google.com/translate_t#%s|en", "d":"Google Translate page for specified language -> English", "f":"https://translate.google.com/"},
+  {"n":"cache", "a":"https://google.com/search?q=cache:%s&strip=1", "d":"Google text-only cache of a webpage", "f":"https://google.com"},
+  {"n":"cat", "a":"https://google.com/search?q=cache:%s&strip=1", "d":"output webpage text from Google cache", "f":"https://google.com"},
+  {"n":"yn", "a":"https://news.search.yahoo.com/search?p=%s", "d":"Yahoo News", "f":"https://news.yahoo.com/"},
+  {"n":"onelook", "a":"https://www.onelook.com/?w=%s&ls=a", "d":"Onelook Dictionary Search", "f":"https://www.onelook.com/"},
+  {"n":"olr", "a":"https://www.onelook.com/?w=*&loc=revfp2&clue=%s", "d":"OneLook Reverse Dictionary", "f":"https://www.onelook.com/reverse-dictionary.shtml"},
+  {"n":"ud", "a":"https://www.urbandictionary.com/define.php?term=%s", "d":"Urban Dictionary Search", "f":"https://www.urbandictionary.com/"},
+  {"n":"dic", "a":"https://dictionary.reference.com/browse/%s", "d":"Dictionary.com", "f":"https://dictionary.com/"},
+  {"n":"thes", "a":"https://www.wordreference.com/thesaurus/%s", "d":"WordReference.com English Thesaurus", "f":"https://www.wordreference.com/thesaurus/"},
+  {"n":"ted", "a":"https://www.ted.com/search?q=%s", "d":"TED Talks", "f":"https://ted.com"},
+  {"n":"r", "a":"https://reddit.com/r/%s", "d":"Reddit", "f":"https://reddit.com"},
+  {"n":"ddg", "a":"https://duckduckgo.com/?q=%s", "d":"DuckDuckGo Search", "f":"https://duckduckgo.com/"},
+  {"n":"ext", "a":"https://filext.com/file-extension/%s", "d":"FILExt - File Extension Search", "f":"https://filext.com/"},
+  {"n":"ebay", "a":"https://www.ebay.com/sch/i.html?_nkw=%s", "d":"Ebay", "f":"https://www.ebay.com/"},
+  {"n":"tw", "a":"https://twitter.com/%s", "d":"Twitter", "f":"https://twitter.com/"},
+  {"n":"tws", "a":"https://twitter.com/search?q=%s", "d":"Twitter Search", "f":"https://twitter.com/search-advanced"},
+  {"n":"imgur", "a":"https://imgur.com/search?q=%s", "d":"Imgur - Image Sharer", "f":"https://imgur.com/"},
+  {"n":"gpdf", "a":"https://www.google.com/search?q=filetype:pdf+%s", "d":"Google PDF Search", "f":"https://www.google.com/search?q=filetype:pdf"},
+  {"n":"gfim", "a":"https://www.google.com/search?tbm=isch&as_q=%s&tbs=sur:fmc", "d":"Google Free Image Search", "f":"https://images.google.com/"},
+  {"n":"ngram", "a":"https://books.google.com/ngrams/graph?content=%s", "d":"Google Books Ngram Viewer", "f":"https://books.google.com/ngrams"},
+  {"n":"gnas", "a":"https://www.google.com/search?q=%s site:news.google.com/newspapers", "d":"Google News Archive Search", "f":"https://news.google.com/newspapers"},
+  {"n":"gsite", "a":"https://www.google.com/search?q=site:%s", "d":"Google Site Search", "f":"https://google.com/"},
+  {"n":"hn", "a":"https://hn.algolia.com/?q=%s", "d":"Hacker News", "f":"https://news.ycombinator.com/"},
+  {"n":"how", "a":"https://www.wikihow.com/?search=%s", "d":"wikiHow - How to do anything", "f":"https://www.wikihow.com/"},
+  {"n":"ifixit", "a":"https://www.ifixit.com/Guide/search/%s", "d":"iFixit - The free repair manual", "f":"https://www.ifixit.com/"},
+  {"n":"y", "a":"https://search.yahoo.com/search;?p=%s", "d":"Yahoo", "f":"https://yahoo.com"},
+  {"n":"yim", "a":"https://images.search.yahoo.com/search/images;?p=%s", "d":"Yahoo Image Search", "f":"https://images.search.yahoo.com/"},
+  {"n":"yv", "a":"https://video.search.yahoo.com/search/video;?p=%s", "d":"Yahoo Video Search", "f":"https://video.search.yahoo.com/"},
+  {"n":"ym", "a":"https://maps.yahoo.com/place/?addr=%s", "d":"Yahoo Maps", "f":"https://maps.yahoo.com"},
+  {"n":"b", "a":"https://www.bing.com/search?q=%s", "d":"Bing Search", "f":"https://www.bing.com/"},
+  {"n":"bim", "a":"https://www.bing.com/images/search?q=%s", "d":"Bing Image Search", "f":"https://www.bing.com/images/"},
+  {"n":"btr", "a":"", "d":"Bing Translator", "f":"https://www.bing.com/translator/"},
+  {"n":"bn", "a":"https://www.bing.com/news/search?q=%s", "d":"Bing News", "f":"https://www.bing.com/news/"},
+  {"n":"bm", "a":"https://www.bing.com/maps/?where1=%s", "d":"Bing Maps", "f":"https://www.bing.com/maps/"},
+  {"n":"bv", "a":"https://www.bing.com/videos/search?q=%s", "d":"Bing Videos", "f":"https://www.bing.com/videos/"},
+  {"n":"gut", "a":"https://www.gutenberg.org/ebooks/search/?query=%s", "d":"Project Gutenberg", "f":"https://www.gutenberg.org/"},
+  {"n":"forvo", "a":"https://www.forvo.com/word/%s", "d":"Forvo Pronunciations", "f":"https://www.forvo.com/"},
+  {"n":"gc", "a":"https://code.google.com/hosting/search?q=%s", "d":"Google Code", "f":"https://code.google.com/"},
+  {"n":"sf", "a":"https://sourceforge.net/directory?q=%s", "d":"SourceForge", "f":"https://sourceforge.net/"},
+  {"n":"git", "a":"https://github.com/search?q=%s", "d":"GitHub", "f":"https://github.com/"},
+  {"n":"bbc", "a":"https://www.bbc.co.uk/search?q=%s", "d":"BBC News", "f":"https://www.bbc.com/news/"},
+  {"n":"dw", "a":"https://www.dw.de/search/english/%s/category/9097/", "d":"Deutsche Welle - English (English)", "f":"https://www.dw.de/"},
+  {"n":"nhken", "a":"https://www2.nhk.or.jp/nhkworld/search/query.cgi?qt=%s", "d":"NHK World - English", "f":"https://www3.nhk.or.jp/nhkworld/"},
+  {"n":"fr24en", "a":"https://www.france24.com/en/search/?Search[term]=%s&Search[page]=1", "d":"France 24 (en) - International News 24/7", "f":"https://www.france24.com/en/"},
+  {"n":"rfien", "a":"https://www.english.rfi.fr/search/sinequa_search/%s", "d":"RFI (en)", "f":"https://www.english.rfi.fr/"},
+  {"n":"abc", "a":"https://www.radioaustralia.net.au/international/search/%s", "d":"ABC Radio Australia", "f":"https://www.radioaustralia.net.au/"},
+  {"n":"gg", "a":"https://groups.google.com/forum/#!search/%s", "d":"Google Groups", "f":"https://groups.google.com/"},
+  {"n":"yg", "a":"https://groups.yahoo.com/neo/search?query=%s", "d":"Yahoo Groups", "f":"https://groups.yahoo.com/"},
+  {"n":"so", "a":"https://stackoverflow.com/search?q=%s", "d":"Stack Overflow", "f":"https://stackoverflow.com/"},
+  {"n":"yw", "a":"", "d":"Yahoo Weather", "f":"https://weather.yahoo.com/"},
+  {"n":"yelp", "a":"https://www.yelp.com/search?find_desc=%s", "d":"Yelp", "f":"https://www.yelp.com/"},
+  {"n":"cnn", "a":"https://edition.cnn.com/search/?query=%s", "d":"CNN International", "f":"https://edition.cnn.com/"},
+  {"n":"rci", "a":"https://www.rcinet.ca/en/?s=%s", "d":"Radio Canada International - English", "f":"https://www.rcinet.ca/en/"},
+  {"n":"cbc", "a":"https://www.cbc.ca/gsa/?q=%s", "d":"CBC News - Canadian Broadcasting Corporation", "f":"https://www.cbc.ca/news"},
+  {"n":"db", "a":"https://www.dropbox.com/home/%s", "d":"Dropbox", "f":"https://dropbox.com"},
+  {"n":"ibn", "a":"https://ibnlive.in.com/searcher/search.php?searchq=%s", "d":"CNN-IBN News - Indian Broadcasting Network (English)", "f":"https://ibnlive.in.com/"},
+  {"n":"voa", "a":"https://www.voanews.com/search/search2.aspx#all|%s|0|allzones|min|now", "d":"Voice of America News (English)", "f":"https://www.voanews.com/"},
+  {"n":"rpen", "a":"https://radio.cz/en/search/?query=%s", "d":"Radio Prague (en)", "f":"https://radio.cz/en"},
+  {"n":"xhen", "a":"http://search.news.cn/language/search.jspa?id=en&t=1&t1=0&ss=&ct=&n1=%s&button=ok", "d":"Xinhua English (en)", "f":"http://www.news.cn/english/"},
+  {"n":"ymail", "a":"", "d":"Yahoo Mail", "f":"https://mail.yahoo.com"},
+  {"n":"mail", "a":"", "d":"Mail.com", "f":"https://www.mail.com/"},
+  {"n":"hmail", "a":"", "d":"Hotmail", "f":"https://hotmail.com"},
+  {"n":"omail", "a":"", "d":"Outlook.com E-mail", "f":"https://outlook.com"},
+  {"n":"dd", "a":"https://downdetector.com/search/?q=%s", "d":"Down Detector", "f":"https://downdetector.com/"},
+  {"n":"isup", "a":"https://www.downforeveryoneorjustme.com/%s", "d":"Down For Everyone Or Just Me", "f":"https://www.downforeveryoneorjustme.com/"},
+  {"n":"dfeojm", "a":"https://www.downforeveryoneorjustme.com/%s", "d":"Down For Everyone Or Just Me", "f":"https://www.downforeveryoneorjustme.com/"},
+  {"n":"ip", "a":"", "d":"What Is My IP", "f":"https://www.whatismyip.com/"},
+  {"n":"ggv", "a":"https://www.google.com/search?tbm=vid&q=%s", "d":"Google Video Search", "f":"https://video.google.com/"},
+  {"n":"gflights", "a":"https://www.google.ca/flights/#search;t=%s", "d":"Google Flights Search", "f":"https://flights.google.com/"},
+  {"n":"trends", "a":"https://www.google.ca/trends/explore#q=%s", "d":"Google Trends", "f":"https://www.google.com/trends/"},
+  {"n":"sp", "a":"https://startpage.com/do/search?query=%s", "d":"Startpage Web Search", "f":"https://startpage.com/"},
+  {"n":"spim", "a":"https://startpage.com/do/search?cat=pics&query=%s", "d":"Startpage Image Search", "f":"https://startpage.com/"},
+  {"n":"spv", "a":"https://startpage.com/do/search?cat=video&query=%s", "d":"Startpage Video Search", "f":"https://startpage.com/"},
+  {"n":"spsite", "a":"https://startpage.com/do/search?query=site:%s", "d":"Startpage Site Search", "f":"https://startpage.com/"},
+  {"n":"ix", "a":"https://ixquick.com/do/search?q=%s", "d":"Ixquick Search Engine", "f":"https://www.ixquick.com/"},
+  {"n":"ixim", "a":"https://ixquick.com/do/search?cat=pics&query=%s", "d":"Ixquick Image Search", "f":"https://ixquick.com/"},
+  {"n":"ixv", "a":"https://ixquick.com/do/search?cat=video&query=%s", "d":"Ixquick Video Search", "f":"https://ixquick.com/"},
+  {"n":"ixsite", "a":"https://ixquick.com/do/search?q=site:%s", "d":"Ixquick Site Search", "f":"https://www.ixquick.com/"},
+  {"n":"vi", "a":"https://vimeo.com/search?q=%s", "d":"Vimeo Videos", "f":"https://vimeo.com/"},
+  {"n":"fspam", "a":"https://www.stopforumspam.com/ipcheck/%s", "d":"Stop Forum Spam - IP Check", "f":"https://www.stopforumspam.com/"},
+  {"n":"lmd", "a":"https://mondediplo.com/spip.php?page=recherche&recherche=%s", "d":"Le Monde diplomatique - English edition", "f":"https://mondediplo.com/"},
+  {"n":"gv", "a":"https://globalvoicesonline.org/?s=%s", "d":"Global Voices (en)", "f":"https://globalvoicesonline.org/"},
+  {"n":"eun", "a":"", "d":"Euronews (en)", "f":"https://www.euronews.com/"},
+  {"n":"reu", "a":"https://www.reuters.com/search?blob=%s", "d":"Reuters", "f":"https://www.reuters.com/"},
+  {"n":"swi", "a":"https://www.swissinfo.ch/action/eng/40468904/search?query=%s", "d":"SwissInfo (en)", "f":"https://www.swissinfo.ch/eng"},
+  {"n":"rt", "a":"https://rt.com/search/everywhere/term/%s/", "d":"RT - Russia Today (en)", "f":"https://rt.com/"},
+  {"n":"blm", "a":"https://search1.bloomberg.com/search/?content_type=all&q=%s", "d":"Bloomberg News", "f":"https://www.bloomberg.com/news/"},
+  {"n":"ascii", "a":"https://www.network-science.de/ascii/ascii.php?TEXT=%s&x=8&y=7&FONT=_all+fonts+with+your+text_&RICH=no&FORM=left&STRE=no", "d":"ASCII Generator", "f":"https://www.network-science.de/ascii/"},
+  {"n":"del", "a":"https://delicious.com/tag/%s", "d":"Delicious.com tag search", "f":"https://delicious.com/"},
+  {"n":"wa", "a":"https://www.wolframalpha.com/input/?i=%s", "d":"Wolfram Alpha", "f":"https://www.wolframalpha.com/"},
+  {"n":"npr", "a":"https://www.npr.org/templates/search/index.php?searchinput=%s", "d":"NPR - National Public Radio", "f":"https://www.npr.org/"},
+  {"n":"mo", "a":"https://www.google.com/gwt/n?u=%s", "d":"Show mobile version of page (via Google)", "f":"https://www.google.com/"},
+  {"n":"js", "a":"https://developer.mozilla.org/en-US/search?q=%s", "d":"Search JavaScript documentation", "f":"https://developer.mozilla.org/en-US/docs/Web/JavaScript"},
+  {"n":"rb", "a":"https://ruby-doc.com/search.html?q=%s", "d":"Search Ruby documentation", "f":"https://ruby-doc.com/"},
+  {"n":"php", "a":"https://www.php.net/%s", "d":"Search PHP documentation", "f":"https://www.php.net/"},
+  {"n":"py", "a":"https://docs.python.org/3/search.html?q=%s", "d":"Search Python documentation", "f":"https://docs.python.org/"},
+  {"n":"sh", "a":"https://mywiki.wooledge.org/ParsingLs?action=fullsearch&context=180&value=%s&fullsearch=Text", "d":"Search Bash documentation on BashFAQ", "f":"https://mywiki.wooledge.org/BashFAQ/"},
+  {"n":"jshint", "a":"", "d":"JSHint, a JavaScript Code Quality Tool", "f":"https://jshint.com/"},
+  {"n":"flint", "a":"https://www.flickr.com/photos/tags/%s/interesting/", "d":"Search Flickr for images, sorted by \"interestingness\"", "f":"https://www.flickr.com/"},
+  {"n":"lman", "a":"https://man.he.net/?section=all&topic=%s", "d":"Linux Man Pages Online", "f":"https://man.he.net/"},
+  {"n":"hl", "a":"https://news.search.yahoo.com/news/rss?ei=UTF-8&p=%s&c=&eo=UTF-8", "d":"Show a list of Yahoo News headlines on a particular topic", "f":"https://news.search.yahoo.com/"},
+  {"n":"imdb", "a":"https://www.imdb.com/find?q=%s", "d":"IMDB - International Movie Database", "f":"https://www.imdb.com/"},
+  {"n":"ccm", "a":"http://ccmixter.org/api/query?search=%s", "d":"ccMixter", "f":"http://ccmixter.org/"},
+  {"n":"ccmt", "a":"http://ccmixter.org/api/query?tags=%s", "d":"ccMixter Tag Search", "f":"http://ccmixter.org/"},
+  {"n":"jam", "a":"https://www.jamendo.com/en/search?qs=q=%s", "d":"Jamendo - Royalty Free Music", "f":"https://www.jamendo.com/"},
+  {"n":"sc", "a":"https://soundcloud.com/search?q=%s", "d":"SoundCloud", "f":"https://soundcloud.com/"},
+  {"n":"ar", "a":"https://archive.org/search.php?query=%s", "d":"Internet Archive", "f":"https://archive.org/"},
+  {"n":"medium", "a":"https://medium.com/search?q=%s", "d":"Medium Search", "f":"https://medium.com/"}
+];
+
+
+var tips = [
+  {"n":"!", "d":"Type ! before any bare url (e.g., \"google.com\") to go directly to the site"},
+  {"n":"calc", "d":"Calculate simple mathematical expressions"},
+  {"n":"==", "d":"Use with calc to test the equivalence of two expressions (e.g., \"calc (25+2)==(28-1)\")"},
+  {"n":">", "d":"Use with calc to test for the greater of two expressions (e.g., \"calc 8>4\")"},
+  {"n":"<", "d":"Use with calc to test for the lesser of two expressions (e.g., \"calc 8<4\")"},
+  {"n":"^", "d":"Use with calc for exponents (e.g., \"calc 5^3\")"},
+  {"n":"~", "d":"Use with calc to round to the nearest integer (e.g., \"calc ~32.56\")"},
+  {"n":"rand ", "d":"Without an argument: returns a random number between 1-100"},
+  {"n":"rand <i>number</i>", "d":"With an argument: returns a random number between 1-<i>number</i>"},
+  {"n":"whatis", "d":"Type whatis and any command to see a description of what it does"},
+  {"n":"where", "d":"Show full search and default URLs for any command"},
+  {"n":"search", "d":"Search through all commands for the given string"},
+  {"n":"mods", "d":"List all additional personal modules, if any"},
+  {"n":"dup", "d":"Check for duplicate entries"},
+  {"n":"pop ", "d":"Open YubSearch in a new window"},
+  {"n":"pop <i>commands</i>", "d":"Open multiple shortcuts simultaneously in different tabs (e.g., \"pop g y b\")"},
+  {"n":"pop <i>commands</i> -t <i>searchterm</i>", "d":"Open multiple searches for <i>searchterm</i> in different tabs (e.g., \"pop gim yim bim -t supernova\")"},
+  {"n":"pop -u <i>urls</i>", "d":"Open a list of <i>urls</i> (e.g., \"pop -u http://google.com http://yahoo.com\")"},
+  {"n":"tips", "d":"List all available commands"},
+  {"n":"ls ", "d":"Same as <b>list</b>"},
+  {"n":"ls <i>command</i>", "d":"Same as <b>whatis</b>"},
+  {"n":"list", "d":"Show all available shortcuts and commands"},
+  {"n":"count", "d":"Show a count of the total number of commands available"},
+  {"n":"help", "d":"Same as <b>tips</b>, display this help message"},
+  {"n":"s", "d":"Same as <b>search</b>"},
+  {"n":"c", "d":"Same as <b>calc</b>"},
+  {"n":"w", "d":"Same as <b>whatis</b>"},
+  {"n":"wh", "d":"Same as <b>where</b>"},
+  {"n":"t", "d":"Same as <b>time</b>"},
+  {"n":"day", "d":"Displays the day of the week and the ISO date for the current locale"},
+  {"n":"date", "d":"Same as <b>day</b>"},
+  {"n":"d", "d":"Same as <b>date</b>"},
+  {"n":"link ", "d":"Print the current url"},
+  {"n":"link <i>command</i>", "d":"Generate a permalink to the given command"},
+  {"n":"href", "d":"Same as <b>link</b>"},
+  {"n":"clear", "d":"Clear all output"},
+  {"n":"create ", "d":"Create a new command"},
+  {"n":"create <i>commandname</i>", "d":"Create a new command called <i>commandname</i>; will alert if command already exists"},
+  {"n":"shuffle ", "d":"Shuffle text randomly (default is to delimit by spaces, or tabs if present)"},
+  {"n":"shuffle -t <i>delimiter</i>", "d":"Shuffles text randomly using  <i>delimiter</i> to separate entries"},
+  {"n":"sort ", "d":"Sorts text (default is to delimit by spaces, or tabs if present)"},
+  {"n":"sort -t <i>delimiter</i>", "d":"Sorts text using <i>delimiter</i> to separate entries"},
+  {"n":"uniq ", "d":"Sorts text and filters out duplicate entries (default is to delimit by spaces, or tabs if present)"},
+  {"n":"uniq -t <i>delimiter</i>", "d":"Sorts text and filters out duplicates using <i>delimiter</i> to separate entries"},
+  {"n":"uniqd ", "d":"Finds duplicates in given text (default is to delimit by spaces, or tabs if present)"},
+  {"n":"uniqd -t <i>delimiter</i>", "d":"Finds duplicates in given text using <i>delimiter</i> to separate entries"},
+  {"n":"wc ", "d":"Counts number of words in given text (default is to delimit by spaces, or tabs if present)"},
+  {"n":"wc -c", "d":"Counts number of characters in given text"},
+  {"n":"wc -t <i>delimiter</i>", "d":"Counts number of words in given text using <i>delimiter</i> to separate entries"},
+  {"n":"ucase", "d":"Converts text to UPPER CASE"},
+  {"n":"upcase", "d":"Same as <b>ucase</b>"},
+  {"n":"lcase", "d":"Converts text to lower case"},
+  {"n":"downcase", "d":"Same as <b>lcase</b>"},
+  {"n":"ccase", "d":"Converts text to Capital Case"},
+  {"n":"capcase", "d":"Same as <b>ccase</b>"},
+  {"n":"caps", "d":"Same as <b>ccase</b>"},
+  {"n":"watch", "d":"Watch a playlist of embedded videos based on the given search term"},
+  {"n":"ytp", "d":"YouTube Player - Same as <b>watch</b>"},
+  {"n":"whoami", "d":"Shows some information about your system"},
+  {"n":"rand site", "d":"Go to random site from list of shortcuts"},
+  {"n":"rand git", "d":"Go to random GitHub repository"},
+  {"n":"rand img", "d":"Go to random image"},
+  {"n":"random ", "d":"Same as <b>rand</b>"},
+  {"n":"echo ", "d":"Says hello"},
+  {"n":"echo <i>string</i>", "d":"Prints the given string"},
+  {"n":"timer", "d":"Opens a stopwatch timer"},
+  {"n":"stopwatch", "d":"Same as <b>timer</b>"},
+  {"n":"sticky ", "d":"An editable sticky note with local storage"},
+  {"n":"sticky -r", "d":"Clear sticky local storage"},
+  {"n":"sticky <i>message</i>", "d":"Open a new sticky note with the contents of <i>message</i>"},
+  {"n":"notepad", "d":"Opens a editable lined notepad with persistent local storage"},
+  {"n":"notepad -r", "d":"Clear notepad local storage"},
+  {"n":">", "d":"Redirect any command to first Google search result (e.g. > wpde Battle of Hastings)"},
+  {"n":"time ", "d":"Print the current local time and date"},
+  {"n":"time <i>locale</i>", "d":"Print the current time and date formatted for a specific language or locale"}
+];
+
+
+      function yubComm(nub) {
+        var nublc = nub.toLowerCase().replace(/[\s\+]$/, "");
+
+        var finished = "";
+
+        var o = document.getElementById("output");
+        var y = document.getElementById("yub");
+
+        if (nublc == "") {
+          o.innerHTML = "Please enter a command.";
+          finished = "done";
+        }
+
+        if (nublc == "count") {
+          var total = 0;
+          if (modson == "off") {
+            total = engines.length + tips.length;
+          } else {
+            total = engines.length + tips.length + mods.length;
+          }
+          o.innerHTML = "There are currently " + total + " commands available!";
+          y.value = "";
+          finished = "done";
+        }
+
+        if (nublc == "clear") {
+          o.innerHTML = "";
+          document.getElementById("create").style.display = "none";
+          document.getElementById("timer").style.display = "none";
+          y.value = "";
+          finished = "done";
+        }
+
+        if (nublc == "dup") {
+          if (modson == "off") {
+            lsshort(engines,tips);
+          } else {
+            lsshort(engines,tips,mods);
+          }
+          var dupArr = [];
+          for (var i = 0; i < allArray.length; i++) {
+            dupArr.push(allArray[i].replace(/\t.*/, ""));
+          }
+          var uniqArr = uniqd(dupArr);
+          if (uniqArr.length == 0) {
+            o.innerHTML = "no duplicates found!";
+          } else {
+            o.innerHTML = uniqArr.join("<br>");
+          }
+          finished = "done";
+        }
+
+        var shcut = nublc.replace(/^([>a-z]+) .*/,"$1");
+        var sterm = nub.replace(/[\s\+]+$/, "").replace(/^[>A-Za-z]+ (.*)/,"$1");
+        var stermlc = sterm.toLowerCase();
+
+        addr = "";
+        loc = "";
+
+        if (shcut == "list" || shcut == "ls") {
+          if (/\s/.test(nublc) == false) {
+            shcutList = "<table>";
+            if (modson == "off") {
+              lsshort(engines,tips);
+            } else {
+              lsshort(engines,tips,mods);
+            }
+            for (var i = 0; i < allArray.length; i++) {
+              shcutList = shcutList + "<tr><td>" + allArray[i].replace(/\t/,"</td><td>") + "</td></tr>";
+            }
+            o.innerHTML = shcutList + "</table>";
+            y.value = "";
+          } else {
+            yubSearch("whatis " + sterm);
+            y.value = "";
+          }
+          finished = "done";
+        }
+
+        if (/^((https*|ftp|file|chrome):\/\/)|(about:)/.test(nub)) {
+          addr = nub;
+          window.location=addr;
+          finished = "done";
+        }
+
+        if (/^\!/.test(nub)) {
+          addr = nub.replace(/^\! */,"http://");
+          window.location=addr;
+          finished = "done";
+        }
+
+        if (shcut == "search" || shcut == "s") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please enter a search string.";
+          } else {
+            if (modson == "off") {
+              lslong(engines);
+            } else {
+              lslong(engines,mods);
+            }
+            var re = new RegExp(sterm.toLowerCase());
+            var shcutList = "<table>";
+            var noresult = 0;
+            for (var i = 0; i < longArray.length; i++) {
+              if (re.test(longArray[i].toLowerCase())) {
+                var l = longArray[i].split("\t");
+                shcutList = shcutList + "<tr><td>" + l[0] + "</td><td>" + l[1] + "</td></tr>";
+                noresult++;
+              }
+            }
+            o.innerHTML = shcutList + "</table>";
+            y.value = "";
+          }
+          if (noresult == 0) {
+            o.innerHTML = "No matching commands found. Try a different search string!";
+          }
+          finished = "done";
+        }
+
+
+        if (shcut == "whatis" || shcut == "w") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please enter a command name.";
+          } else {
+            if (modson == "off") {
+              lsshort(engines,tips);
+            } else {
+              lsshort(engines,tips,mods);
+            }
+            var noresult = 0;
+            for (var i = 0; i < allArray.length; i++) {
+              if (allArray[i].replace(/\s*\t.*/, "") == sterm) {
+                o.innerHTML = allArray[i].replace(/\t/, " = ");
+                noresult++;
+              }
+            }
+            if (noresult == 0) {
+              o.innerHTML = "Command \"" + sterm + "\" not found. Please try again.";
+            }
+          }
+          finished = "done";
+        }
+
+        if (shcut == "where" || shcut == "wh") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please enter a command name.";
+          } else {
+            if (modson == "off") {
+              lslong(engines);
+            } else {
+              lslong(engines,mods);
+            }
+            var noresult = 0;
+            for (var i = 0; i < longArray.length; i++) {
+              var l = longArray[i].split("\t");
+              if (l[0] == sterm) {
+                o.innerHTML = l[0] + " = " + l[1] + "<br><div class='grey'>Search: " + l[2] + "<br>Default: " + l[3] + "</div>";
+                noresult++;
+                y.value = "";
+              }
+            }
+          if (noresult == 0) {
+            o.innerHTML = "Command \"" + sterm + "\" not found. Please try again.";
+          }
+          }
+          finished = "done";
+        }
+
+        if (shcut == "calc" || shcut == "c") {
+          o.innerHTML = eval(sterm.replace(/[a-zA-Z]/g, "").replace(/([\d\.]+)\^([\d\.]+)/g, "Math.pow($1,$2)").replace(/~([\d\.]+)/g, "Math.round($1)"));
+          finished = "done";
+        }
+
+        if (shcut == "random" || shcut == "rand") {
+          if (sterm == "site") {
+            lslong(engines,mods);
+            var rfloor = longArray.length;
+            rfloor = Math.floor(Math.random()*rfloor);
+            var addr = longArray[rfloor].split("\t")[3];
+            window.location = addr;
+          } else if (sterm == "git") {
+            randgit();
+          } else if (sterm == "img") {
+            var addr = "https://imgur.com/random";
+            window.location = addr;
+          } else {
+            var rfloor = sterm.replace(/[^\d]/g, "");
+            rfloor == "" ? rfloor = 101 : rfloor = parseInt(rfloor) + 1;
+            o.innerHTML = Math.floor(Math.random()*rfloor);
+          }
+          finished = "done";
+        }
+
+        if (shcut == "pop") {
+          if (modson == "off") {
+            lslong(engines);
+          } else {
+            lslong(engines,mods);
+          }
+          if (/\s/.test(nublc) == false) {
+            window.open(document.URL,'_blank','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+            window.open(window.location, '_self').close();
+          } else if (/-u/.test(sterm) == true) {
+            a = /-u (.*)/.exec(sterm)[1];
+//             c = /(http:\/\/.*?)(?:\s+||$)/g.exec(a);
+            var httpArr = a.split(" ");
+            for (var i = 0; i < httpArr.length; i++) {
+              window.open(httpArr[i]);
+            }
+            return true;
+          } else if (/-t/.test(sterm) == true) {
+            var a = sterm.split(" -t ");
+            var comm = a[0];
+            var text = a[1];
+            var commArr = comm.split(" ");
+            var httpArr = [];
+            for (var c = 0; c < commArr.length; c++) {
+              for (var i = 0; i < longArray.length; i++) {
+                var l = longArray[i].split("\t");
+                if (commArr[c] == l[0]) {
+                  httpArr.push(l[2].replace(/%s/, text));
+                }
+              }
+            }
+            for (var i = 0; i < httpArr.length; i++) {
+              window.open(httpArr[i]);
+            }
+            return true;
+          } else {
+            var comm = sterm.split(" ");
+            var httpArr = [];
+            for (var c = 0; c < comm.length; c++) {
+              for (var i = 0; i < longArray.length; i++) {
+                var l = longArray[i].split("\t");
+                if (comm[c] == l[0]) {
+                  httpArr.push(l[3]);
+                }
+              }
+            }
+            for (var i = 0; i < httpArr.length; i++) {
+              window.open(httpArr[i]);
+            }
+          return true;
+          }
+          finished = "done";
+        }
+
+        if (shcut == "href" || shcut == "link") {
+          var url = location.href;
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "The current url is: " + url;
+          } else {
+            var encurl = encodeURI(url + "?" + sterm);
+            o.innerHTML = "The current url is: " + url + "<br><br>You entered the following command: " + sterm + "<br><a href='" + encurl + "'>Permalink</a>";
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "echo") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Hi there! :)";
+          } else {
+            o.innerHTML = sterm;
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "sort") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to sort.";
+          } else {
+            var d = delimit(sterm);
+            o.innerHTML = d.sort().join("<br>");
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "shuffle") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to shuffle.";
+          } else {
+            var d = delimit(sterm);
+            o.innerHTML = shuffle(d).join("<br>");
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "uniq") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text as an argument to uniq.";
+          } else {
+            var d = delimit(sterm);
+            o.innerHTML = uniq(d).join("<br>");
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "uniqd") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text as an argument to uniqd.";
+          } else {
+            var d = delimit(sterm);
+            o.innerHTML = uniqd(d).join("<br>");
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "ucase" || shcut == "upcase") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to convert to upper case.";
+          } else {
+            o.innerHTML = sterm.toUpperCase();
+          }
+          finished = "done";
+        }
+
+        if (shcut == "lcase" || shcut == "downcase") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to convert to lower case.";
+          } else {
+            o.innerHTML = sterm.toLowerCase();
+          }
+          finished = "done";
+        }
+
+        if (shcut == "ccase" || shcut == "capcase" || shcut == "caps") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to convert to initial caps.";
+          } else {
+            o.innerHTML = sterm.toLowerCase().replace(/(^|\s+)(.)/g,function(_, a, l){return a+l.toUpperCase();});
+          }
+          finished = "done";
+        }
+
+        if (shcut == "wc") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please input some text to count.";
+          } else if (/^\-c /.test(sterm) == true) {
+            c = sterm.replace(/^\-c /,"");
+            o.innerHTML = c.split(/./).length -1;
+          } else {
+            var d = delimit(sterm);
+            o.innerHTML = d.length;
+          }
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "watch" || shcut == "ytp") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "Please provide a search term for something you would like to watch.";
+          } else {
+            p = '<iframe width="640" height="390" src="https://www.youtube.com/embed?listType=search&list=' + sterm + '" frameborder="0" allowfullscreen></iframe>';
+            o.innerHTML = p;
+          }
+//           y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "timer" || shcut == "stopwatch") {
+          timer();
+
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "whoami") {
+          o.innerHTML = "<table><tr><td>Browser code name: </td><td>" + navigator.appCodeName + "</tr><tr><td>Browser offical name: </td><td>" + navigator.appName + "</tr><tr><td>Browser Version: </td><td>" + navigator.appVersion + "</tr><tr><td>Java enabled? </td><td>" + navigator.javaEnabled() + "</tr><tr><td>Browser Language: </td><td>" + navigator.language + "</tr><tr><td>All languages in order of preference: </td><td>" + navigator.languages + "</tr><tr><td>Browser online? </td><td>" + navigator.onLine + "</tr><tr><td>Current operating system: </td><td>" + navigator.oscpu + "</tr><tr><td>Browser platform: </td><td>" + navigator.platform + "</tr><tr><td>User agent: </td><td>" + navigator.userAgent.replace(/\)/,")<br>") + "</td></tr></table>";
+          y.value = "";
+          finished = "done";
+        }
+
+        if (shcut == "sticky") {
+          y.value = "";
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = '<link href="https://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet" type="text/css"><div class="note" style="width:350px; height:350px; background-color:#ffff88; font-family:\'Reenie Beanie\'; font-size:36px; border-bottom-right-radius: 60px 5px; transform: rotate(-3deg)" id="b" contenteditable="true"></div>';
+            if (localStorage.sticky) {
+              b["innerHTML"]=[localStorage.sticky];
+            } else {
+              b["innerHTML"]="This is an editable sticky. Type something to add notes here.";
+            }
+            window.b.setAttribute("oninput", "localStorage.sticky=b['innerHTML']");
+            window.b.focus();
+          } else if (/^\-r/.test(sterm) == true) {
+              localStorage.sticky = "";
+              o.innerHTML = "Local storage has been cleared.";
+              y.focus();
+          } else {
+              localStorage.sticky = sterm;
+              yubComm("sticky");
+              window.b.focus();
+          }
+          finished = "done";
+        }
+
+        if (shcut == "notepad") {
+          y.value = "";
+          if (sterm == "-r") {
+            localStorage.np = "";
+            o.innerHTML = "Local storage has been cleared.";
+            y.focus();
+          } else {
+            o.innerHTML = '<div class="note" style="width:40%; height:50%; background: -webkit-repeating-linear-gradient( top, #FFFAFA, #FFFAFA 35px, #81cbbc 40px ); background: -moz-repeating-linear-gradient( top, snow, snow 38px, #81cbbc 40px ); background: repeating-linear-gradient( top, snow, snow 38px, #81cbbc 40px ); line-height:40px" id="b" contenteditable="true"></div>';
+//           b["innerHTML"]=[localStorage.c];
+            if (localStorage.np) {
+              b["innerHTML"]=[localStorage.np];
+            } else {
+              b["innerHTML"]="This is an editable notepad with automatic local storage.\nClick here to add some notes.";
+            }
+            window.b.setAttribute("oninput", "localStorage.np=b['innerHTML']");
+            window.b.focus();
+          }
+          finished = "done";
+        }
+
+        if (shcut == ">") {
+          if (/\s/.test(nublc) == false) {
+            o.innerHTML = "To use the > redirect prefix, input a yubnub command and a search term as arguments, for example:<br>> wp Hedgehogs<br>(Uses Google to search Wikipedia and goes automatically to the first result)";
+          } else {
+            var surl = "";
+            var nterm = sterm.replace(/.*?\s(.*)/,"$1");
+            if (modson == "off") {
+              lslong(engines);
+            } else {
+              lslong(engines,mods);
+            }
+            c = 0;
+            for (var i = 0; i < longArray.length; i++) {
+              var l = longArray[i].split("\t");
+              if (l[0] == sterm.replace(/\s.*/,"")) {
+                surl = l[3].replace(/(https*:\/\/.*?)\/.*/, "$1");
+                c++;
+              }
+            }
+            if (c == 0) {
+              o.innerHTML = "No command \"" + sterm + "\" found. Please try again!";
+            } else {
+              var gfl = "https://google.com/search?q=site:" + surl + "+" + nterm + "&btnI=I%27m+Feeling+Lucky";
+              window.location = gfl;
+            }
+          }
+          finished = "done";
+        }
+
+        if (shcut == "create") {
+          var cr = document.getElementById("create");
+          var scn = document.getElementById("scname");
+          if (/\s/.test(nublc) == true) {
+            if (modson == "off") {
+              lsshort(engines,tips);
+            } else {
+              lsshort(engines,tips,mods);
+            }
+            c = 0;
+            for (var i = 0; i < allArray.length; i++) {
+              if (allArray[i].replace(/\s*\t.*/, "") == sterm) {
+                c++;
+              }
+            }
+            if (c > 0) {
+              o.innerHTML = "A command with the name \"" + sterm + "\" already exists. Please try another command name.";
+            } else {
+              cr.style.display = '';
+              scn.value = sterm;
+              scn.focus();
+              scn.select();
+            }
+          } else {
+            if (cr.style.display == '') {
+              cr.style.display = 'none';
+            } else {
+              cr.style.display = '';
+              scn.focus();
+              scn.select();
+            }
+          }
+          finished = "done";
+        }
+
+        if (shcut == "time" || shcut == "t") {
+          d = new Date();
+          t = d.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+          iso = d.toISOString().replace(/T.*/,"");
+          df = d.toLocaleDateString("en-US", {weekday: "long", month: "long", day: "numeric"});
+          finished = "done";
+          if (sterm != "time" && sterm != "t") {
+            df = d.toLocaleDateString(sterm, {weekday: "long", month: "long", day: "numeric"});
+            finished = "done";
+          }
+          o.innerHTML = t + "<br><div class='grey'>" + df + "<br>(" + iso + ")</div>";
+        }
+
+        if (shcut == "day" || shcut == "date" || shcut == "d") {
+          d = new Date();
+          day = d.getDay().toString().replace(/0/,"Sunday").replace(/1/,"Monday").replace(/2/,"Tuesday").replace(/3/,"Wednesday").replace(/4/,"Thursday").replace(/5/,"Friday").replace(/6/,"Saturday");
+          iso = d.toISOString().replace(/T.*/,"");
+          o.innerHTML = day + "<br><div class='grey'>(" + iso + ")</div>";
+          finished = "done";
+        }
+
+        if (shcut == "skin") {
+          stylesheet = document.getElementById("stylesheet");
+//           if ls then list available skins
+//           if non-existent then print error
+          stylesheet.href = "css/" + sterm + ".css";
+          o.innerHTML = "yub.js skin successfully changed to \"" + sterm + "\"!";
+          finished = "done";
+        }
+
+        if (shcut == "tips" || shcut == "help" || shcut == "man") {
+          var commList = "<table>";
+          var noresult = 0;
+          if (/\s/.test(nublc) == false) {
+            for (var i = 0; i < tips.length; i++) {
+              commList = commList + "<tr><td>" + tips[i].n + "</td><td>" + tips[i].d + "</td></tr>\n";
+            }
+            o.innerHTML = commList.split("\n").sort().join("\n") + "</table>";
+            y.value = "";
+          } else {
+            lsshort(tips);
+            var noresult = 0;
+            for (var i = 0; i < allArray.length; i++) {
+              if (allArray[i].replace(/\s*\t.*/, "") == sterm) {
+                o.innerHTML = allArray[i].replace(/\t/, " = ");
+                noresult++;
+              }
+            }
+            if (noresult == 0) {
+              o.innerHTML = "Command \"" + sterm + "\" not found. Please try again.";
+            }
+          }
+          finished = "done";
+        }
+
+//         if (nublc == "shortcuts") {
+//           shcList = "<table>";
+//           for (var i = 0; i < shortcuts.length; i++) {
+//             shcList = shcList + "<tr><td>" + shortcuts[i].shcName + "</td><td>" + shortcuts[i].shcDesc + "</td></tr>\n";
+//           }
+//           o.innerHTML = shcList.split("\n").sort().join("\n") + "</table>";
+//           y.value = "";
+//           finished = "done";
+//         }
+
+        if (nublc == "mods") {
+          if (modson == "off") {
+            o.innerHTML = "No additional modules loaded.";
+          } else {
+            modList = "<table>";
+            for (var i = 0; i < mods.length; i++) {
+              modList = modList + "<tr><td>" + mods[i].n + "</td><td>" + mods[i].d + "</td></tr>\n";
+            }
+            o.innerHTML = modList.split("\n").sort().join("\n") + "</table>";
+            y.value = "";
+          }
+          finished = "done";
+        }
+
+        for (var i = 0; i < engines.length; i++) {
+          if (engines[i].n == shcut) {
+            finished = "done";
+            if (shcut == stermlc && /\s/.test(nublc) == false) {
+              addr = engines[i].f;
+              window.location=addr;
+            } else {
+              loc = engines[i].a;
+              addr = loc.replace(/%s/,sterm);
+              window.location=addr;
+            }
+          }
+        }
+
+//         for (var i = 0; i < shortcuts.length; i++) {
+//           if (shortcuts[i].shcName == shcut) {
+//             addr = shortcuts[i].shcAddr;
+//             window.location=addr;
+//             finished = "done";
+//           }
+//         }
+
+        if (modson == "on") {
+          for (var i = 0; i < mods.length; i++) {
+            if (mods[i].n == shcut) {
+              finished = "done";
+              if (shcut == stermlc && /\s/.test(nub) == false) {
+                addr = mods[i].f;
+                window.location=addr;
+              } else {
+                loc = mods[i].a;
+                addr = loc.replace(/%s/,sterm);
+                window.location=addr;
+              }
+            }
+          }
+        }
+
+        if (finished == "") {
+          escNub = encodeURIComponent(nub).replace(/'/g, "@39@");
+          o.innerHTML = "Command '" + shcut + "' not found. <input class='button' type='submit' value='edit' onclick=\"editNub('" + escNub + "')\" accesskey='e'><br>Type 'list' or 'ls' to see all commands.";
+          y.value = "";
+        } 
+}
+
+
+      function yubSearch(nub) {
+        yubComm(nub);
+        return false;
+      }
+
+      function lsshort() {
+        for (var allArray = [], i = 0; i < arguments.length; i++) for (var l = 0; l < arguments[i].length; l++) allArray.push(arguments[i][l].n + "\t" + arguments[i][l].d);
+        window.allArray = allArray.sort();
+      }
+
+      function lslong(n,p) {
+        var f = [];
+        if ("off" == modson) for (var i = 0; i < n.length; i++) f.push(n[i].n + "\t" + n[i].d + "\t" + n[i].a + "\t" + n[i].f); else {
+          for (var i = 0; i < n.length; i++) f.push(n[i].n + "\t" + n[i].d + "\t" + n[i].a + "\t" + n[i].f);
+          for (var i = 0; i < p.length; i++) f.push(p[i].n + "\t" + p[i].d + "\t" + p[i].a + "\t" + p[i].f);
+        }
+        window.longArray = f.sort();
+      }
+
+      function uniq(a) {
+        a = a.sort();
+        var r = [a[0]];
+        for (var i = 1; i < a.length; i++) {
+          if (a[i-1] !== a[i]) {
+            r.push(a[i]);
+          }
+        }
+        return r;
+      }
+
+
+      function uniqd(a) {
+        tmp = new Array(0);
+        tmp2 = new Array(0);
+          for(i=0;i<a.length;i++){
+            if(!contains(tmp, a[i])){
+              tmp.length+=1;
+              tmp[tmp.length-1]=a[i];
+            } else {
+              tmp2.length+=1;
+              tmp2[tmp2.length-1]=a[i];
+            }
+          }
+        return tmp2;
+      }
+
+      function contains(a, e) {
+        for(j=0;j<a.length;j++)if(a[j]==e)return true;
+        return false;
+      }
+
+      function delimit(a) {
+        var b = new Array(0);
+        if (/^\-t /.test(a)) {
+          d = a.replace(/^\-t (.*?) .*/,"$1");
+          b = a.replace(/^\-t (.*?) /,"").split(d);
+        } else if (/\t/.test(a)) {
+          b = a.split("\t");
+        } else {
+          b = a.split(" ");
+        }
+        return b;
+      }
+
+      function shuffle(a) {
+        var c = a.length, t, r;
+        while (0 !== c) {
+          r = Math.floor(Math.random() * c);
+          c -= 1;
+          t = a[c];
+          a[c] = a[r];
+          a[r] = t;
+        }
+      return a;
+      }
+
+      function createYub() {
+        var scname = document.getElementById("scname").value.toLowerCase();
+        var saddr = document.getElementById("saddr").value;
+        var defurl = document.getElementById("defurl").value;
+        var descr = document.getElementById("descr").value.replace(/"/g,'\\"');
+        prompt("Copy the code below to your mods.js file:", "  {\"n\":\"" + scname + "\", \"a\":\"" + saddr + "\", \"d\":\"" + descr + "\", \"f\":\"" + defurl + "\"},");
+      }
+
+      function timer() {
+        var sw = document.getElementById("timer");
+        sw.style.display = '';
+
+        window.sec = min = hour = 0;
+        window.clock = 0;
+
+      }
+
+      function stopWatch() {
+        clearTimeout(window.clock);
+        window.sec++;
+          if (window.sec >=59){
+            window.sec = 0;
+            min++;
+          }
+          if (min>=59){
+            min=0;
+            hour++;
+          }
+        document.getElementById("sec").innerHTML = (window.sec < 10) ? "0" + window.sec : window.sec;
+        document.getElementById("min").innerHTML = (min < 10) ? "0" + min : min;
+        document.getElementById("hour").innerHTML = (hour < 10) ? "0" + hour : hour;
+        window.clock = setTimeout("stopWatch()",1000);
+      }
+
+      function pause() {
+        clearTimeout(window.clock);
+        return false;
+      }
+
+      function play() {
+        stopWatch();
+        return false;
+      }
+
+      function reset() {
+        clearTimeout(window.clock);
+        window.sec = min = hour = 0;
+        document.getElementById("sec").innerHTML = "00";
+        document.getElementById("min").innerHTML = "00";
+        document.getElementById("hour").innerHTML = "00";
+        return false;
+      }
+
+      function clearTimer() {
+        document.getElementById("timer").style.display = "none";
+      }
+
+      function randgit() {
+        function init(){
+          var number = getRandomIntInclusive(0, 60000000);
+          console.log(number);
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', 'https://api.github.com/repositories?since=' + number, true);
+          xhr.send();
+
+          xhr.onreadystatechange = function(e){
+            openRepo(e, xhr)
+          };
+        }
+
+        function getRandomIntInclusive(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function openRepo (e, xhr){
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var full_name = JSON.parse(xhr.responseText)[0]['full_name'];
+            location.href = 'https://github.com/' + full_name;
+          }
+        }
+        init();
+      }
+
+      function editNub(nub) {
+        yub = document.getElementById("yub");
+        yub.value = decodeURIComponent(nub.replace(/@39@/g, "'"));
+	yub.focus();
+      }
+
+
+
+    </script>
+  </head>
+  <body onload="var geturl = location.href; if (/\?/.test(geturl) == true) { var args = /\?(.*)/.exec(geturl)[1]; args=/\+/.test(args)?args.replace(/\+/g,' ').replace(/\s+$/,''):args; yubSearch(decodeURIComponent(args)); finished = 'done';}">
+    <center>
+    <div id="ybox">
+      <h2>yub.js</h2>
+      <h3>web command-line</h3>
+        <form>
+            <input class="inputbox" type="text" value="" autofocus="autofocus" autocomplete="off" id="yub">
+            <input class="button" type="submit" value="yub!" onclick="return yubSearch(document.getElementById('yub').value)">
+            <div class="grey"><p class='small'>type 'list' to see all available search shortcuts, or 'tips' for more commands</p></div>
+        </form>
+    </div>
+    <div id="output">&nbsp;</div>
+    </center>
+
+    <div id="create" style="display:none;">
+    <center>
+      <h4>Create a new yub command!</h4>
+        <table>
+          <tr><td>Shortcut Name:</td><td><input type="text" id="scname" size="50" placeholder="Enter the command name here"></td></tr>
+          <tr><td>Search Address:</td><td><input type="text" id="saddr" size="50" placeholder="Enter search URL with search term replaced by %s"></td></tr>
+          <tr><td>Default URL:</td><td><input type="text" id="defurl" size="50" placeholder="Enter the address to go to if search term is blank"></td></tr>
+          <tr><td>Description:</td><td><input type="text" id="descr" size="50" placeholder="Enter a description or site title"></td></tr>
+        </table><br>
+      <input id="createcomm" type="button" class="button" value="Create New Command!" accesskey='c' onclick='createYub();'>
+    </center>
+    </div>
+
+    <div id="container" style="margin: 0 auto; width: 300px; padding: 20px;">
+    <div id="timer" style="display:none; position:absolute;">
+      <span style="font-size:small; float:right; cursor:pointer;" onclick='clearTimer();' title="click to close">x</span><br>
+      <center>
+        <span id="hour">00</span>:<span id="min">00</span>:<span id="sec">00</span><br><br>
+        <input type="button" class="button" id="start" onClick="stopWatch()" accesskey='s' title="Shift+Alt+S" value="Start">
+        <input type="button" class="button" id="pause" onClick="pause()" accesskey='p' title="Shift+Alt+P" value="Pause">
+        <input type="button" class="button" id="play" onClick="play()" accesskey='o' title="Shift+Alt+O" value="Continue">
+        <input type="button" class="button" id="reset" onClick="reset()" accesskey='r' title="Shift+Alt+R" value="Reset">
+      </center>
+    </div>
+    </div>
+
+  </body>
+</html>
