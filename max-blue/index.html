@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-	mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="styles.css">
+		<title>Stammy | Home</title>
+	</head>
+
+<body>
+	<div align="center" id="social-navbar">
+		<div>
+			<a class="social-icons fab fa-twitch" href="https://www.twitch.tv/OfficialStammy"></a>
+			<a class="social-icons fab fa-youtube" href="https://www.youtube.com/channel/UCfefFTW2YuFvX4BHIwRsetw"></a>
+		</div>
+		<div>
+			<img src="Media/Stammy/Logo red.png" alt="Stammy Logo" class="logo">
+		</div>
+		<div>
+			<a class="social-icons fab fa-steam-symbol" href="https://steamcommunity.com/id/OfficialStammy/"></a> 
+			<a class="social-icons fab fa-discord" href="https://discord.gg/gT5SX2F"></a>
+		</div>	
+	</div>
+	<div align="center" style="width:100%; margin-top: -5vh">
+		<!-- Add a placeholder for the Twitch embed -->
+    	<div id="twitch-embed"></div>
+
+    	<!-- Load the Twitch embed script -->
+    	<script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    	<!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+		<script type="text/javascript">
+      		new Twitch.Embed("twitch-embed", { width: "100%", height: "100%", channel: "OfficialStammy", theme: "dark" });
+		</script>
+</div>
+	<footer>
+		<a href="http://jmerritt.uk/"><p style="font-size: 10px">© JARED MERRITT 2018</p></a>
+</footer>
+</body>
+	
+</html>

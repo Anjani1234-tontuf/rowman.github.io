@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORDO</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    
+    <div class="container">
+        <p id="warning" class="warning"> Error message is logged here  </p>
+        <div id="messages" class="messages">
+            <section id="loader" class="messages__loader"></section>
+            
+            <section id="search-tip" class="messages__search-tip fade-in">
+                <span class="messages__search-tip--search-icon"><i class="fa fa-search"></i></span>
+                <p class="messages__text-tip">hit the search bar below to <br> start searching</p>
+            </section>
+
+            <section id="connection-tip" class="messages__connection-tip">
+                <span class="messages__connection-tip--wifi-icon"><i class="fa fa-wifi"></i></span>
+                <p class="messages__text-tip">oops! connection error <br>please check your connection <br>and try again</p>
+            </section>
+        </div>
+
+        <div id="intro-view" class="intro-view">
+            <section id="intro-message" class="intro-message">
+                <h2 id="logo" class="intro-message__logo fade-in-logo">wordo</h2>
+                <p id="about-wordo" class="intro-message-text slide-in-text">
+                    Wordo is a simple dictionary with thousands of words whose 
+                    definitions and other meaningful info attached to it you can 
+                    access from your device.
+                </p>
+                <button id="intro-explore-btn" class="intro-message__explore">EXPLORE <i class="fa fa-angle-right"></i></button>
+            </section>
+
+            <section id="intro-body" class="intro-body">
+                <div class="swipe-container">
+                    <span class="swipe-container__swipe"><i class="fa fa-arrow-left"></i></span>
+                    <p class="swipe-container__swipe">swipe</p>
+                    <span class="swipe-container__swipe"><i class="fa fa-arrow-right"></i></span>
+                    <!-- <a href="#dog" class="dots active" onclick="dotActive(0)"></a>
+                    <a href="#search" class="dots" onclick="dotActive(1)"></a>
+                    <a href="#home" class="dots" onclick="dotActive(2)"></a>
+                    <a href="#sing" class="dots" onclick="dotActive(3)"></a> -->
+                </div>
+                <div class="intro-images-container">
+                    <section id="dog" class="intro-images dog">
+                        <p class="intro-image__text">
+                            <span class="intro-image-text--word">DOG</span> <br>
+                            / 'dog / <br>
+                            a highly variable domestic mammal <br>
+                            (canis familiaris) closely related to <br>
+                            the gray wolf. <br><br>
+                            <strong>Example</strong><br>
+                            Kobby is a good dog, she likes <br>
+                            reading and swimming. <br>
+                        </p>
+                    </section>
+
+                    <!-- <section id="search" class="intro-images search">
+                        <p class="intro-image__text">
+                            <span class="intro-image-text--word">SEARCH</span> <br>
+                            / 'serch / <br>
+                            to carefully look for someone or something <br>
+                            to try to find someone or something. <br><br>
+                            <strong>Example</strong><br>
+                            I'm in search of a job, I'm a passionate frontend developer<br>
+                            and a graphic designer. <br>
+                        </p>
+                        </p>
+                    </section> -->
+                    
+                    <section id="home" class="intro-images home">
+                        <p class="intro-image__text">
+                            <span class="intro-image-text--word">HOME</span> <br>
+                            / 'hom / <br>
+                            the place (such as house or apartment where) <br>
+                            someone lives.<br><br>
+                            <strong>Example</strong><br>
+                            My home is beautiful, I live with my family<br>
+                            in it and we are very happy! <br>
+                    </section>
+                    
+                    <section id="sing" class="intro-images sing">
+                        <p class="intro-image__text">
+                            <span class="intro-image-text--word">SING</span> <br>
+                            /sin/ <br>
+                            to use your voice to make musical sounds in <br>
+                            the form of a somg or tune.<br><br>
+                            <strong>Example</strong><br>
+                            Asides coding, I play the piano while I sing <br>
+                            my favorite songs. <br>
+                        </p>
+                    </section>
+                </div>        
+                
+                <button id="intro-view-explore-btn" class="intro-view__explore">EXPLORE <i class="fa fa-angle-right"></i></button>
+            </section>
+        </div>
+
+        <div id="main-view" class="main-view slide-element-in">
+
+            <section id="menu" class="menu">
+                <ul class="menu-options">
+                    <li id="words-saved-link" class="words-saved">
+                        <span class="menu-options__saved-icon"><i class="fa fa-bookmark"></i></span> 
+                        <p class="menu-options__saved"> Words you saved </p>                        
+                    </li>
+                    <li id="word-of-the-day" class="wotd">
+                        <span class="menu-options__wotd-icon"><i class="fa fa-th-large"></i></span> 
+                        <p class="menu-options__wotd"> Word of the day </p>                        
+                    </li>
+                </ul>
+                <span id="close-menu" class="menu__remove-icon"><i class="fa fa-times"></i></span>
+            </section>
+
+            <section class="nav">
+                <h4 class="nav__logo-text">wordo</h4>
+                <span id="menu-icon" class="nav__menu-icon"><i class="fa fa-grip-lines"></i></span>
+            </section>
+
+            <div id="main-body" class="main-body">
+                <!-- the codes below will be generated by javascript -->
+                <!-- <section id="word-container" class="word-container">
+                    <div class="word-utils">
+                        <p class="word-utils__part-of-speech">Noun</p>
+                        <p class="word-utils__save">save</p>
+                    </div>
+    
+                    <div class="word">
+                        <h3 class="word__text">DESIGN</h3>
+                        <p class="word__transcription">/ di-zain /</p>
+                        <p class="word__definition">to plan and make decisions about something that is being built or created.</p>
+                    </div>
+                </section>
+    
+                <section id="definitions" class="definitions-container">
+                    <h4 class="definitions-container__header">Definitions</h4>
+                    <p class="definitions-container__text">to plan and make decisions about something that is being built or created.</p>
+                    <p class="definitions-container__text">to plan and make something for a specific purpose.</p>
+                </section>
+    
+                <section class="examples-overall-container">
+                    <h4 class="examples-overall-container__header">Examples</h4>
+    
+                    <div class="example-container">
+                        <section class="example">
+                            <p class="example__text">
+                                Good designers design applications like this, so applaud one when you see one.
+                            </p>
+                        </section>
+                        
+                        <section class="example">
+                            <p class="example__text">
+                                I enjoy using adobe to design stuffs like logos, flyers and labels.
+                            </p>
+                        </section>
+    
+                        <section class="example">
+                            <p class="example__text">
+                                Good designers design applications like this, so applaud one when you see one.
+                            </p>
+                        </section>
+                        
+                        <section class="example">
+                            <p class="example__text">
+                                I enjoy using adobe to design stuffs like logos, flyers and labels.
+                            </p>
+                        </section>
+                    </div>
+    
+                </section>
+    
+                <section class="syllables-container">
+                    <h4 class="syllables-container__header">Syllables</h4>
+    
+                    <div class="syllables">
+                        <p class="syllables__word">de-sign</p>
+                        <p class="syllables__count">2</p>
+                    </div>
+                </section>
+    
+                <section class="synonym-antonym">
+                    <h4 class="synonym-antonym__header">Synonyms</h4>
+    
+                    <div class="synonyms">
+                        <p class="synonyms__text">plan, blueprint, drawing, sketchplan </p>
+                    </div>
+    
+                    <hr class="synonym-antonym__divider"/>
+    
+                    <h4 class="synonym-antonym__header">Antonyms</h4>
+    
+                    <div class="synonyms">
+                        <p class="synonyms__text">none</p>
+                    </div>
+                </section> -->
+            </div>
+
+            <section class="search-utils">
+                <p id="recent-search-header" class="search-utils__header">Recently searched</p>
+
+                <div id="recent-search" class="recent-search-container">
+                    <!-- the code below will be generated by javascript -->
+                    <!-- <section class="recent-search">
+                        <p class="recent-search__word">hope</p>
+                        <span class="recent-search__remove-icon"><i class="fa fa-times"></i></span>
+                    </section>
+                    
+                    <section class="recent-search">
+                        <p class="recent-search__word">passion</p>
+                        <span class="recent-search__remove-icon"><i class="fa fa-times"></i></span>
+                    </section>
+
+                    <section class="recent-search">
+                        <p class="recent-search__word">deliberate</p>
+                        <span class="recent-search__remove-icon"><i class="fa fa-times"></i></span>
+                    </section> -->
+
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="user-input" class="search-container__input" placeholder="search">
+                    <span id="search-btn" class="search-container__botton"><i class="fa fa-search"></i></span>
+                </div>
+            </section>
+        </div>
+
+        <div id="bookmark-view" class="bookmark-view">
+            <section class="bookmark-header-container">
+                <span id="bookmark-exit-btn" class="bookmark-header-container__return-icon"><i class="fa fa-arrow-left"></i></span>
+                <h4 class="bookmark-header-container__header">Words you saved</></h4>
+                <span class="bookmark-header-container__bookmark-icon"><i class="fa fa-bookmark"></i></span>
+            </section>
+
+            <section id="saved-words-container" class="saved-words-container">
+                <div id="saved-words-message" class="saved-words-message">
+                    <span class="saved-words-message__exclamation-icon"><i class="fa fa-exclamation-circle"></i></span>
+                    <p class="saved-words-message__message-text">you haven't saved any word yet, <br> go ahead save some words you'd <br> like to remember</p>
+                </div>
+                <!-- the code below will be generated by javascript -->
+                <!-- <div class="saved">
+                    <p class="saved__word">hype</p>
+                    <span id="saved-remove-btn" class="saved__remove-icon"><i class="fa fa-times"></i></span>
+                </div>
+                
+
+                <div class="saved">
+                    <p class="saved__word">designer</p>
+                    <span class="saved__remove-icon"><i class="fa fa-times"></i></span>
+                </div>
+
+                <div class="saved">
+                    <p class="saved__word">complicated</p>
+                    <span class="saved__remove-icon"><i class="fa fa-times"></i></span>
+                </div>
+
+                <div class="saved">
+                    <p class="saved__word">derivatives</p>
+                    <span class="saved__remove-icon"><i class="fa fa-times"></i></span>
+                </div> -->
+            </section>
+        </div>
+
+    </div>
+    
+    <script type="module" src="app.js"></script>
+    <script type="module" src="processData.js"></script>
+</body>
+</html>

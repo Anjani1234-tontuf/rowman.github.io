@@ -1,0 +1,100 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+}
+body {
+    background-color: rgb(53, 53, 53);
+}
+.container {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 90%;
+    height: auto;
+    max-width: 700px;
+    padding: 70px 40px;
+    margin: 100px auto;
+    text-align: center;
+    background-color: rgb(247, 247, 247);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.container .logo {
+    background-color: rgb(53, 53, 53);
+    color: rgb(255, 204, 109);
+    width: 60%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+.data-process input {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    border: none;
+    color: grey;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    padding-left: 30px;
+    padding-right: 30px;
+    outline-color: rgb(255, 204, 109);
+    letter-spacing: 1.5px;
+}
+::placeholder {
+    font-style: italic;
+    color: rgb(199, 199, 199);
+    letter-spacing: 0;
+}
+.data-process h4 {
+    color: rgb(80, 80, 80);
+    font-size: 14px;
+    margin: 15px;
+}
+.data-process .output {
+    width: 100%;
+    max-width: 400px;
+    min-height: 40px;
+    max-height: auto;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    word-wrap: break-word;
+    color: grey;
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: left;
+}
+.container .credits {
+    margin: 20px 0 -50px 0;
+    font-size: 12px;
+}
+
+/* @media only screen and (max-width: 600px) {
+    .data-process input {
+        outline-color: rgb(255, 204, 109);
+    }
+} */

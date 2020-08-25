@@ -1,0 +1,82 @@
+body {
+    background: #FDC8E6;
+    font-family: 'Fredoka One', cursive;
+}
+
+.btn:focus, .btn:active, button:focus, button:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.click-to-copy {
+    margin-top: 10px;
+    color: #FB7ABC;
+    white-space: nowrap;
+}
+
+.container-fluid, .container {
+    background: white;
+    width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    -webkit-box-shadow: 0 8px 6px -6px grey;
+    -moz-box-shadow: 0 8px 6px -6px grey;
+    box-shadow: 0 8px 6px -6px grey;
+}
+
+.container-emoji {
+    background: none;
+    box-shadow: none;
+    height: 400px;
+}
+
+.footer-note {
+    margin: 20px 0 10px 0;
+    color: white;
+}
+
+.footer-link {
+    color: #FB7ABC;
+}
+
+.footer-link:hover {
+    color: #FB7ABC;
+    text-decoration: none;
+}
+
+.kaomoji {
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    display: inline-block;
+    margin: 10px;
+    font-size: 40px;
+    font-family: 'Nunito';
+    white-space: nowrap;
+}
+
+.kaomoji:hover {
+    background: rgba(255, 255, 255, 0.7);
+    ;
+}
+
+nav {
+    -webkit-box-shadow: 0 5px 6px -6px grey;
+    -moz-box-shadow: 0 5px 6px -6px grey;
+    box-shadow: 0 5px 6px -6px grey;
+}
+
+.nav-item:hover {
+    color: #FB7ABC !important;
+}
+
+@media (max-width: 768px) {
+    .col-emoji {
+        margin: 10px 20px 10px 20px;
+    }
+    .kaomoji {
+        font-size: 50px;
+    }
+    .nav-link {
+        font-size: 30px;
+    }
+}
