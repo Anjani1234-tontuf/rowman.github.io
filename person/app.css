@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway|Varela+Round|Coda);
+body {
+    background-color: #eee;
+    font-family: "Coda", sans-serif;
+}
+
+.profile {
+    background-color: white;
+    width: 450px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.profile-content {
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.picture-container {
+    flex-basis: 100px;
+}
+
+.picture-container #picture {
+    width: 75px;
+    height: 75px;
+    border-radius: 50px;
+}
+
+#getUserBtn {
+    background-color: teal;
+    width: 100%;
+    border: 1px solid teal;
+    height: 60px;
+    font-size: 16px;
+    color: white;
+    border-radius: 0 0 5px 5px;
+}
+
+#name {
+    color: teal;
+    margin: 0px;
+    text-transform: capitalize;
+}
+
+#username {
+    color: lightblue;
+    margin-top: -5px;
+    font-size: 14px;
+}
+
+#email,
+#city {
+    margin: 2px;
+    color: gray;
+    font-size: 15px;
+}
+
+button:hover {
+    cursor: pointer;
+}

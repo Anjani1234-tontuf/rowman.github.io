@@ -1,0 +1,69 @@
+html{
+  background:black;
+  height:100%;
+}
+body{
+  height:100%;
+}
+@font-face{
+  font-family:Gochi;
+  src:url(../fonts/Gochi.ttf);
+}
+.contain{
+  color:white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  background-color:black;
+  min-height:100%;
+}
+h1{
+  font-family:Gochi;
+}
+input{
+  font-family:Courier New;
+}
+span{
+  font-family:Courier New;
+}
+.uno{
+  font-size:12px;
+}
+.dos{
+  font-size:16px;
+}
+.tres{
+  font-size:20px;
+}
+.btn{
+  background-color:black;
+}
+h5{
+  font-family: Courier New;
+}
+nav .brand-logo{
+  margin-left:1%;
+  width:50px;
+  height:50px;
+}
+.logo{
+  margin-top:25%;
+  width:100%;
+}
+.nav-wrapper{
+  background-color:black;
+}
+.leftarr{
+  margin-left:2%;
+  color:white;
+  font-size:50px;
+}
+.rightarr{
+  margin-right:2%;
+  color:white;
+  font-size:50px;
+}
+a{
+  text-decoration:none;
+  color:white;
+  font-family:Courier New;
+}

@@ -1,0 +1,93 @@
+html{
+  background:black;
+  height:100%;
+}
+body{
+  height:100%;
+}
+@font-face{
+  font-family:Gochi;
+  src:url(../fonts/Gochi.ttf);
+}
+.big{
+  border-right:1px solid white;
+  border-left:1px solid white;
+}
+.container{
+  color:white;
+  background-color:black;
+  min-height:100%;
+}
+h1{
+  font-family:Gochi;
+}
+h5{
+  font-family: Courier New;
+}
+nav .brand-logo{
+  margin-left:1%;
+  width:50px;
+  height:50px;
+}
+.logo{
+  margin-top:25%;
+  width:100%;
+}
+.nav-wrapper{
+  background-color:black;
+}
+input{
+  font-family:Courier New;
+}
+.gifSearch{
+  padding-bottom:2%;
+}
+.heading{
+  display:none;
+  font-family:Gochi;
+}
+.popGIF{
+  display:none;
+  height:400px;
+  overflow:scroll !important;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+.popGIF img{
+  width:20%;
+  padding:1%;
+  border-radius:5px;
+}
+.giffage img{
+  width:33%;
+  padding:1%;
+  border-radius:5px;
+}
+.giffery{
+  padding-top:1%;
+  padding-bottom:1%;
+}
+.card-cont{
+  border:1px white solid;
+}
+.leftarr{
+  margin-left:2%;
+  color:white;
+  font-size:50px;
+}
+.rightarr{
+  margin-right:2%;
+  color:white;
+  font-size:50px;
+}
+a{
+  text-decoration:none;
+  color:white;
+}
